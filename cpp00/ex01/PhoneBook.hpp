@@ -6,13 +6,15 @@
 class PhoneBook {
 	private:
 		Contact	contacts[8];
-		
-	public:
 		int		index;
-		// PhoneBook();
-		void add_contact();
-		void search_contact();
-		void exit_app();
+
+	public:
+		PhoneBook();
+		// int		get_index();
+		// void	set_index(int index);
+		void	add_contact();
+		void	search_contact();
+		void	exit_app();
 
 };
 
