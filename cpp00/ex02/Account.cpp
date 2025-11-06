@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Account.hpp"
 
 int	Account::getNbAccounts( void )
@@ -18,11 +19,17 @@ int	Account::getNbWithdrawals( void )
 }
 void	Account::displayAccountsInfos( void )
 {
-    return ();
+    std::cout << "bye bye!\n";
 }
 
-Account( int initial_deposit );
-~Account( void );
+Account( int initial_deposit )
+{
+    std::cout << "ma3rft mandir mhm ana l constructor" << ini
+}
+~Account( void )
+{
+    std::cout << "bye bye!\n";
+}
 
 void	makeDeposit( int deposit );
 bool	makeWithdrawal( int withdrawal );

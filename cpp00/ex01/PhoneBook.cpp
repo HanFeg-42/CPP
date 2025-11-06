@@ -4,10 +4,8 @@
 #include <string>
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook()
-{
-    index = 0;
-}
+// PhoneBook::PhoneBook() : index(0) {}
+
 
 void    PhoneBook::add_contact()
 {
@@ -18,11 +16,10 @@ void    PhoneBook::add_contact()
 void    print_info(std::string str)
 {
     if (str.length() >= 10)
-        std::cout << str.substr(0, 9) << ".|";
+        std::cout << str.substr(0, 9) + "." << "|";
     else
         std::cout << std::setw(10) << str << "|";
 }
-
 
 
 void    PhoneBook::search_contact()

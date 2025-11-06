@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Contact.hpp"
 
 std::string Contact::get_first_name()
