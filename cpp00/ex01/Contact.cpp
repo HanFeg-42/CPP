@@ -1,66 +1,92 @@
 #include "Contact.hpp"
 
-std::string Contact::get_first_name()
+std::string Contact::getFirstName()
 {
-    return (first_name);
+    return (firstName);
 }
 
-std::string Contact::get_last_name()
+std::string Contact::getLastName()
 {
-    return (last_name);
+    return (lastName);
 }
 
-std::string Contact::get_nickname()
+std::string Contact::getNickname()
 {
     return (nickname);
 }
 
-std::string Contact::get_phone_num()
+std::string Contact::getPhoneNum()
 {
-    return (phone_num);
+    return (phoneNum);
 }
 
-std::string Contact::get_secret()
+std::string Contact::getSecret()
 {
     return (secret);
 }
 
-void		Contact::set_first_name(std::string first_name)
+void		Contact::setFirstName(std::string firstName)
 {
-    this->first_name = first_name;
+    this->firstName = firstName;
 }
 
-void		Contact::set_last_name(std::string last_name)
+void		Contact::setLastName(std::string lastName)
 {
-    this->last_name = last_name;
+    this->lastName = lastName;
 }
 
-void		Contact::set_nickname(std::string nickname)
+void		Contact::setNickname(std::string nickname)
 {
     this->nickname = nickname;
 }
 
-void		Contact::set_phone_num(std::string phone_num)
+void		Contact::setPhoneNum(std::string phoneNum)
 {
-    this->phone_num = phone_num;
+    this->phoneNum = phoneNum;
 }
 
-void		Contact::set_secret(std::string secret)
+void		Contact::setSecret(std::string secret)
 {
     this->secret = secret;
 }
 
-
-void    Contact::set_info()
+bool    isValidPhone(std::string phone)
 {
-    std::cout << "Enter the First Name: ";
-    std::getline(std::cin, first_name);
-    std::cout << "Enter the Last Name: ";
-    std::getline(std::cin, last_name);
-    std::cout << "Enter the nickname: ";
-    std::getline(std::cin, nickname);
-    std::cout << "Enter the phone number: ";
-    std::getline(std::cin, phone_num);
-    std::cout << "Enter the darkest secret: ";
-    std::getline(std::cin, secret);
+    if (phone.empty())
+        return false;
+    for (size_t i = 0; i < phone.length(); i++)
+    {
+        if (!std::isdigit(phone[i]) && phone[i] != ' ' && phone[i] != '+' && phone[i] != '-')
+            return false;
+    }
+    return true;
+}
+
+void    Contact::setInfo()
+{
+    while (firstName.empty())
+    {
+        std::cout << "Enter the First Name: ";
+        std::getline(std::cin, firstName);
+    }
+    while (lastName.empty())
+    {
+        std::cout << "Enter the Last Name: ";
+        std::getline(std::cin, lastName);
+    }
+    while (nickname.empty())
+    {
+        std::cout << "Enter the nickname: ";
+        std::getline(std::cin, nickname);
+    }
+    while (!isValidPhone(phoneNum))
+    {
+        std::cout << "Enter the phone number: ";
+        std::getline(std::cin, phoneNum);
+    }
+    while (secret.empty())
+    {
+        std::cout << "Enter the darkest secret: ";
+        std::getline(std::cin, secret);
+    }
 }

@@ -7,19 +7,20 @@ int main()
     PhoneBook pb;
     std::string cmd;
 
+    // std::cout << "\033[1;35m__phonebook__\033[0m";
     while (1)
     {
-        std::cout << "\033[1;35mphonebook->\033[0m";
+        std::cout << "\033[1;35mEnter a command ADD, SEARCH or EXIT: \033[0m";
         std::getline(std::cin, cmd);
         if (std::cin.eof() || std::cin.fail())
             break;
         if (cmd.compare("ADD") == 0)
-            pb.add_contact();
+            pb.addContact();
         else if (cmd.compare("SEARCH") == 0)
-            pb.search_contact();
+            pb.searchContact();
         else if (cmd.compare("EXIT") == 0)
-            pb.exit_app();
+            break ;
         else
-            std::cout << "Unvalid command!\n";
+            std::cout << "\033[31mInvalid command!\033[0m\n";
     }
 }

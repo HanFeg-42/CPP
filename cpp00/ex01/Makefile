@@ -4,9 +4,11 @@ NAME	=	phonebook
 SRC	=	$(shell find -name "*.cpp")
 OBJ_D	= obj
 OBJ	=	$(SRC:%.cpp=$(OBJ_D)/%.o)
+
 $(OBJ_D)/%.o: %.cpp
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
