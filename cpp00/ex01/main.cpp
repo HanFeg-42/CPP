@@ -7,7 +7,6 @@ int main()
     PhoneBook pb;
     std::string cmd;
 
-    // std::cout << "\033[1;35m__phonebook__\033[0m";
     while (1)
     {
         std::cout << "\033[1;35mEnter a command ADD, SEARCH or EXIT: \033[0m";
