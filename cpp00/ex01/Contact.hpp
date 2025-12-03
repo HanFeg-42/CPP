@@ -1,6 +1,11 @@
 #ifndef CONTACT_H
 # define CONTACT_H
 # include <iostream>
+# include "Contact.hpp"
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
+#include <string>
 
 class Contact {
 
@@ -13,16 +18,8 @@ class Contact {
 
 	public:
 		void		setInfo();
-		std::string getFirstName();
-		std::string getLastName();
-		std::string getNickname();
-		std::string getPhoneNum();
-		std::string getSecret();
-		void		setFirstName(std::string firstName);
-		void		setLastName(std::string lastName);
-		void		setNickname(std::string nickname);
-		void		setPhoneNum(std::string phoneNum);
-		void		setSecret(std::string secret);
+		void		displaySavedContact();
+		void		displaySearchContact();
 };
 
 bool    isValidPhone(std::string phone);

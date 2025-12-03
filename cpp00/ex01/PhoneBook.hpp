@@ -16,6 +16,7 @@ class PhoneBook {
 	public:
 		PhoneBook();
 
+		void	start();
 		void	addContact();
 		void	searchContact();
 };

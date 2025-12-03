@@ -1,55 +1,5 @@
 #include "Contact.hpp"
 
-std::string Contact::getFirstName()
-{
-	return (firstName);
-}
-
-std::string Contact::getLastName()
-{
-	return (lastName);
-}
-
-std::string Contact::getNickname()
-{
-	return (nickname);
-}
-
-std::string Contact::getPhoneNum()
-{
-	return (phoneNum);
-}
-
-std::string Contact::getSecret()
-{
-	return (secret);
-}
-
-void		Contact::setFirstName(std::string firstName)
-{
-	this->firstName = firstName;
-}
-
-void		Contact::setLastName(std::string lastName)
-{
-	this->lastName = lastName;
-}
-
-void		Contact::setNickname(std::string nickname)
-{
-	this->nickname = nickname;
-}
-
-void		Contact::setPhoneNum(std::string phoneNum)
-{
-	this->phoneNum = phoneNum;
-}
-
-void		Contact::setSecret(std::string secret)
-{
-	this->secret = secret;
-}
-
 bool    isValidPhone(std::string phone)
 {
 	if (phone.empty())
@@ -100,4 +50,30 @@ void    Contact::setInfo()
 		if (std::cin.eof() || std::cin.fail())
 			throw_error("Error: EOF");
 	} while (secret.empty());
+}
+
+
+void    print_info(std::string str)
+{
+    if (str.length() >= 10)
+        std::cout << str.substr(0, 9) + "." << "|";
+    else
+        std::cout << std::setw(10) << str << "|";
+}
+
+
+void    Contact::displaySearchContact()
+{
+    std::cout << "First Name:\t\t" << firstName << std::endl;
+    std::cout << "Lasr Name:\t\t" << lastName << std::endl;
+    std::cout << "Nickname:\t\t" << nickname << std::endl;
+    std::cout << "Phone number:\t\t" << phoneNum << std::endl;
+    std::cout << "Darkest secret:\t\t" << secret << std::endl;
+}
+
+void    Contact::displaySavedContact()
+{
+    print_info(firstName);
+    print_info(lastName);
+    print_info(nickname);
 }

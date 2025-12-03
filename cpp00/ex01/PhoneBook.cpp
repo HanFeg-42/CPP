@@ -10,14 +10,6 @@ void    PhoneBook::addContact()
         total++;
 }
 
-void    print_info(std::string str)
-{
-    if (str.length() >= 10)
-        std::cout << str.substr(0, 9) + "." << "|";
-    else
-        std::cout << std::setw(10) << str << "|";
-}
-
 void    display_all_contacts(int total, Contact contacts[8])
 {
     int i;
@@ -29,24 +21,12 @@ void    display_all_contacts(int total, Contact contacts[8])
     while (i < total)
     {
         std::cout << "|" << std::setw(10) << i << "|";
-        print_info(contacts[i].getFirstName());
-        print_info(contacts[i].getLastName());
-        print_info(contacts[i].getNickname());
+        contacts[i].displaySavedContact();
         std::cout << std::endl;
         std::cout << "---------------------------------------------" << std::endl;
         i++;
     }
 }
-
-void display_searchContact(Contact contact)
-{
-    std::cout << "First Name:\t\t" << contact.getFirstName() << std::endl;
-    std::cout << "Lasr Name:\t\t" << contact.getLastName() << std::endl;
-    std::cout << "Nickname:\t\t" << contact.getNickname() << std::endl;
-    std::cout << "Phone number:\t\t" << contact.getPhoneNum() << std::endl;
-    std::cout << "Darkest secret:\t\t" << contact.getSecret() << std::endl;
-}
-
 
 void    PhoneBook::searchContact()
 {
@@ -58,7 +38,28 @@ void    PhoneBook::searchContact()
     std::getline(std::cin, str);
     search_index = atoi(str.c_str());
     if (isValidPhone(str) && search_index < total && search_index >= 0)
-        display_searchContact(contacts[search_index]);
+        contacts[search_index].displaySearchContact();
     else
         std::cout << "\033[31mInvalid index!\033[0m" << std::endl;
+}
+
+void    PhoneBook::start()
+{
+    std::string cmd;
+
+    while (1)
+    {
+        std::cout << "\033[1;35mEnter a command ADD, SEARCH or EXIT: \033[0m";
+        std::getline(std::cin, cmd);
+        if (std::cin.eof() || std::cin.fail())
+            break;
+        if (cmd.compare("ADD") == 0)
+            addContact();
+        else if (cmd.compare("SEARCH") == 0)
+            searchContact();
+        else if (cmd.compare("EXIT") == 0)
+            break ;
+        else
+            std::cout << "\033[31mInvalid command!\033[0m\n";
+    }
 }

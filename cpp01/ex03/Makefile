@@ -1,6 +1,6 @@
 CPP	=	c++
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98
-NAME	=	zombie
+NAME	=	unnecessary_violence
 SRC	=	$(shell find -name "*.cpp")
 OBJ_D	= obj
 OBJ	=	$(SRC:%.cpp=$(OBJ_D)/%.o)
