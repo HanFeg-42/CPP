@@ -9,19 +9,19 @@
 
 class Contact {
 
-	private:
-		std::string firstName;
-		std::string lastName;
-		std::string nickname;
-		std::string phoneNum;
-		std::string secret;
+private:
+	std::string firstName;
+	std::string lastName;
+	std::string nickname;
+	std::string phoneNum;
+	std::string secret;
 
-	public:
-		void		setInfo();
-		void		displaySavedContact();
-		void		displaySearchContact();
+public:
+	void		setInfo();
+	void		displaySavedContact();
+	void		displaySearchContact();
 };
 
-bool    isValidPhone(std::string phone);
+std::string	getInput(std::string prompt);
 
 #endif

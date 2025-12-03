@@ -1,4 +1,4 @@
-CPP	=	c++
+CC	=	c++
 CFLAGS	=	-Wall -Wextra -Werror -std=c++98
 NAME	=	phonebook
 SRC	=	$(shell find -name "*.cpp")
@@ -12,7 +12,7 @@ $(OBJ_D)/%.o: %.cpp
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CPP) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ_D)
@@ -21,3 +21,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re

@@ -28,14 +28,25 @@ void    display_all_contacts(int total, Contact contacts[8])
     }
 }
 
+bool    isValidPhone(std::string phone)
+{
+	if (phone.empty())
+		return false;
+	for (size_t i = 0; i < phone.length(); i++)
+	{
+		if (!std::isdigit(phone[i]) && phone[i] != ' ' && phone[i] != '+')
+			return false;
+	}
+	return true;
+}
+
 void    PhoneBook::searchContact()
 {
     int search_index;
     std::string str;
 
     display_all_contacts(total, contacts);
-    std::cout << "\nEnter the index: ";
-    std::getline(std::cin, str);
+    str = getInput("\nEnter the index: ");
     search_index = atoi(str.c_str());
     if (isValidPhone(str) && search_index < total && search_index >= 0)
         contacts[search_index].displaySearchContact();

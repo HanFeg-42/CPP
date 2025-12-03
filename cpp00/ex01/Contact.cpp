@@ -1,16 +1,5 @@
 #include "Contact.hpp"
 
-bool    isValidPhone(std::string phone)
-{
-	if (phone.empty())
-		return false;
-	for (size_t i = 0; i < phone.length(); i++)
-	{
-		if (!std::isdigit(phone[i]) && phone[i] != ' ' && phone[i] != '+')
-			return false;
-	}
-	return true;
-}
 
 void	throw_error(std::string err)
 {
@@ -18,40 +7,26 @@ void	throw_error(std::string err)
 	exit(EXIT_FAILURE);
 }
 
-void    Contact::setInfo()
+std::string	getInput(std::string prompt)
 {
+	std::string input;
 	do {
-		std::cout << "Enter the First Name: ";
-		std::getline(std::cin, firstName);
+		std::cout << prompt;
+		std::getline(std::cin, input);
 		if (std::cin.eof() || std::cin.fail())
-			throw_error("Error: EOF");
-	} while (firstName.empty());
-	do {
-		std::cout << "Enter the Last Name: ";
-		std::getline(std::cin, lastName);
-		if (std::cin.eof() || std::cin.fail())
-			throw_error("Error: EOF");
-	}while (lastName.empty());
-	do {
-		std::cout << "Enter the nickname: ";
-		std::getline(std::cin, nickname);
-		if (std::cin.eof() || std::cin.fail())
-			throw_error("Error: EOF");
-	} while (nickname.empty());
-	do {
-		std::cout << "Enter the phone number: ";
-		std::getline(std::cin, phoneNum);
-		if (std::cin.eof() || std::cin.fail())
-			throw_error("Error: EOF");
-	} while (!isValidPhone(phoneNum));
-	do {
-		std::cout << "Enter the darkest secret: ";
-		std::getline(std::cin, secret);
-		if (std::cin.eof() || std::cin.fail())
-			throw_error("Error: EOF");
-	} while (secret.empty());
+			throw_error("\nError: EOF");
+	} while (input.empty());
+	return input;
 }
 
+void    Contact::setInfo()
+{
+	firstName = getInput("Enter the First Name: ");
+	lastName = getInput("Enter the Last Name: ");
+	nickname = getInput("Enter the nickname: ");
+	phoneNum = getInput("Enter the phone number: ");
+	secret = getInput("Enter the darkest secret: ");
+}
 
 void    print_info(std::string str)
 {

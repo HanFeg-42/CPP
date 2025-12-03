@@ -55,7 +55,6 @@ int	Account::getNbWithdrawals( void )
 	return (_totalNbWithdrawals);
 }
 
-// [19920104_091532] accounts:8;total:20049;deposits:0;withdrawals:0
 void	Account::displayAccountsInfos( void )
 {
 	_displayTimestamp();
