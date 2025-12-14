@@ -2,7 +2,6 @@
 # define _ZOMBIE_H_
 
 # include <iostream>
-# include <string>
 
 class Zombie {
     std::string _name;
@@ -12,7 +11,7 @@ public:
     void announce( void );
 };
 
-Zombie* newZombie( std::string name );
-void randomChump( std::string name );
+Zombie*	newZombie( std::string name );
+void	randomChump( std::string name );
 
 #endif

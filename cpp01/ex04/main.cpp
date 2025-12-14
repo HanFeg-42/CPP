@@ -30,17 +30,18 @@ int	main(int ac, char *av[])
 		std::cerr << "Error : Invalid argument" << std::endl;
 		return 1;
 	}
+	std::ifstream inFile(av[1]);
+	if (!inFile.is_open())
+	{
+		std::cout << "Error : Opening file for reading" << std::endl;
+		return 1;
+	}
 	filename = av[1];
 	std::ofstream outFile((filename + ".replace").c_str());
 	if (!outFile.is_open())
 	{
 		std::cout << "Error : Opening file for writing" << std::endl;
-		return 1;
-	}
-	std::ifstream inFile(av[1]);
-	if (!inFile.is_open())
-	{
-		std::cout << "Error : Opening file for reading" << std::endl;
+		outFile.close();
 		return 1;
 	}
 	std::string line;

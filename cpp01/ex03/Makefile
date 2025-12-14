@@ -1,18 +1,18 @@
-CPP	=	c++
-CFLAGS	=	-Wall -Wextra -Werror -std=c++98
-NAME	=	unnecessary_violence
+CXX	=	c++
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
+NAME	=	main
 SRC	=	$(shell find -name "*.cpp")
 OBJ_D	= obj
 OBJ	=	$(SRC:%.cpp=$(OBJ_D)/%.o)
 
 $(OBJ_D)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CXX) $(CXXFLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CPP) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	rm -rf $(OBJ_D)
@@ -21,3 +21,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
