@@ -1,6 +1,6 @@
 CXX	=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
-NAME	=	harl
+NAME	=	fixed
 SRC	=	$(shell find -name "*.cpp")
 OBJ_D	= obj
 OBJ	=	$(SRC:%.cpp=$(OBJ_D)/%.o)
@@ -21,5 +21,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re
