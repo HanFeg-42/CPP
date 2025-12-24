@@ -9,8 +9,7 @@ Fixed::Fixed( int const value ) : _value(value << _fractionalBits) {
 Fixed::Fixed( float const value ) : _value(roundf(value * (1 << _fractionalBits))) {
 }
 
-Fixed::~Fixed() {
-}
+Fixed::~Fixed() {}
 
 Fixed& Fixed::operator=(const Fixed& other) {
 	if (this == &other)
@@ -19,10 +18,7 @@ Fixed& Fixed::operator=(const Fixed& other) {
 	return *this;
 }
 
-Fixed::Fixed(const Fixed& other)
-{
-	*this = other;
-}
+Fixed::Fixed(const Fixed& other) : _value(other._value) {}
 
 int	Fixed::getRawBits( void ) const
 {
@@ -153,4 +149,3 @@ const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
 {
 	return (a._value > b._value) ? a : b; 
 }
-
