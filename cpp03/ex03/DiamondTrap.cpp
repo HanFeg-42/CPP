@@ -1,11 +1,4 @@
 #include "DiamondTrap.hpp"
-/* TODO
-• ClapTrap::name (parameter of the constructor + "_clap_name" suffix)
-• Hit points (FragTrap)
-• Energy points (ScavTrap)
-• Attack damage (FragTrap)
-• attack() (ScavTrap)
-*/
 
 DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap()
 {

@@ -8,6 +8,7 @@ int main()
     a.attack("sasuki");
     b.beRepaired(10);
     a.takeDamage(5);
+    a.guardGate();
 
     return 0;
 }
