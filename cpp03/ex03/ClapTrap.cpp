@@ -5,7 +5,7 @@ ClapTrap::ClapTrap() :
     _energyPoints(10),
     _attackDamage(0)
 {
-    std::cout << "Default constructor called\n";
+    std::cout << "ClapTrap Default constructor called\n";
 }
 
 ClapTrap::ClapTrap(std::string name) :
@@ -14,7 +14,7 @@ ClapTrap::ClapTrap(std::string name) :
     _energyPoints(10),
     _attackDamage(0)
 {
-    std::cout << _name << "Paramitrized constructor called\n";
+    std::cout << "ClapTrap " << _name << " constructor called\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) :
@@ -23,7 +23,7 @@ ClapTrap::ClapTrap(const ClapTrap& other) :
     _energyPoints(other._energyPoints),
     _attackDamage(other._attackDamage)
 {
-    std::cout << _name << "Copy constructor called\n";
+    std::cout << "ClapTrap " << _name << " Copy constructor called\n";
 }
 
 
@@ -42,12 +42,12 @@ void    ClapTrap::attack(const std::string& target)
 {
     if (_hitPoints <= 0)
     {
-        std::cout << "ClapTrap " << _name << "Can't attack! No HP left!\n";
+        std::cout << "ClapTrap " << _name << " Can't attack! No HP left!\n";
         return ;
     }
     if (_energyPoints <= 0)
     {
-        std::cout << "ClapTrap " << _name << "Can't attack! No energy points left!\n";
+        std::cout << "ClapTrap " << _name << " Can't attack! No energy points left!\n";
         return ;
     }
     std::cout << "ClapTrap " << _name << " attacks " << target
@@ -56,16 +56,6 @@ void    ClapTrap::attack(const std::string& target)
 }
 void    ClapTrap::takeDamage(unsigned int amount)
 {
-    if (_hitPoints <= 0)
-    {
-        std::cout << "ClapTrap " << _name << "Can't be repaired! No HP left!\n";
-        return ;
-    }
-    if (_energyPoints <= 0)
-    {
-        std::cout << "ClapTrap " << _name << "Can't be repaired! No energy points left!\n";
-        return ;
-    }
     if (_hitPoints >= amount)
         _hitPoints -= amount;
     else
@@ -94,5 +84,5 @@ void    ClapTrap::beRepaired(unsigned int amount)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << _name << "Destructor called\n";
+    std::cout << "ClapTrap "<< _name << " Destructor called\n";
 }
