@@ -4,67 +4,41 @@
 
 int main()
 {
+	//subject tests
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	delete j;//should not create a leak
 	delete i;
 
-	return 0;
+	// My tests
+	Animal *animals[4] = {
+		new Dog(),
+		new Dog(),
+		new Cat(),
+		new Cat()
+	};
+	std::cout << std::endl;
+	
+	animals[0]->makeSound();
+	animals[2]->makeSound();
+	std::cout << std::endl;
+	
+	Cat c;
+	Dog d;
+	c.getBrain()->setIdea(0, "I'm just a Cat");
+	d.getBrain()->setIdea(0, "I want to eat");
+	std::cout << c.getBrain()->getIdea(0) << std::endl;
+	std::cout << d.getBrain()->getIdea(0) << std::endl;
+	std::cout << std::endl;
+
+	// Deep copy test
+	Cat a(c);
+	std::cout << std::endl;
+	if (a.getBrain() != c.getBrain())
+		std::cout << "Diffrent Brain adresses" << std::endl;
+	std::cout << std::endl;
+
+	for (int i = 0; i < 4; i++)
+		delete animals[i];
+	std::cout << std::endl;
 }
-
-// int main()
-// {
-//     std::cout << "----- TEST 1: Copy constructor deep copy -----\n";
-
-//     Cat original;
-//     original.getBrain()->setIdea(0, "I want fish");
-
-//     Cat copy(original);
-
-//     std::cout << "Original idea: "
-//               << original.getBrain()->getIdea(0) << std::endl;
-//     std::cout << "Copy idea: "
-//               << copy.getBrain()->getIdea(0) << std::endl;
-
-//     original.getBrain()->setIdea(0, "I want sleep");
-//     copy.getBrain()->setIdea(0, "I want milk");
-
-//     std::cout << "After modification:\n";
-//     std::cout << "Original idea: "
-//               << original.getBrain()->getIdea(0) << std::endl;
-//     std::cout << "Copy idea: "
-//               << copy.getBrain()->getIdea(0) << std::endl;
-
-
-//     std::cout << "\n----- TEST 2: Assignment operator deep copy -----\n";
-
-//     Cat a;
-//     Cat b;
-
-//     a.getBrain()->setIdea(0, "I want milk");
-//     b = a;
-
-//     std::cout << "A idea: "
-//               << a.getBrain()->getIdea(0) << std::endl;
-//     std::cout << "B idea: "
-//               << b.getBrain()->getIdea(0) << std::endl;
-
-//     b.getBrain()->setIdea(0, "I want to play");
-
-//     std::cout << "After modification:\n";
-//     std::cout << "A idea: "
-//               << a.getBrain()->getIdea(0) << std::endl;
-//     std::cout << "B idea: "
-//               << b.getBrain()->getIdea(0) << std::endl;
-
-
-//     std::cout << "\n----- TEST 3: Destructor safety -----\n";
-
-//     {
-//         Cat temp1;
-//         Cat temp2(temp1);
-//     }
-
-//     std::cout << "End of tests\n";
-//     return 0;
-// }

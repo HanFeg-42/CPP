@@ -22,7 +22,7 @@ WrongCat&    WrongCat::operator=(const WrongCat& other)
 
 void    WrongCat::makeSound() const
 {
-	std::cout << "Meawwww!\n";
+	std::cout << "WrongCat sound!\n";
 }
 
 WrongCat::~WrongCat()

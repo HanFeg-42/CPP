@@ -1,19 +1,12 @@
-#pragma once
-
 #include "Ice.hpp"
 
-Ice::Ice() : AMateria("ice")
-{
-}
+Ice::Ice() : AMateria("Ice") {}
 
-Ice::Ice(const Ice & other) : AMateria(other)
-{
-}
+Ice::Ice(const Ice & other) : AMateria(other) {}
 
 Ice & Ice::operator=(const Ice & other)
 {
-	if (this != &other)
-		_type = other._type;
+	(void)other;
 	return *this;
 }
 
@@ -27,6 +20,4 @@ void Ice::use(ICharacter& target)
 	std::cout << "* shoots an ice bolt at " << target.getName() << " *\n";
 }
 
-Ice::~Ice()
-{
-}
+Ice::~Ice() {}

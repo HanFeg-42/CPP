@@ -1,24 +1,14 @@
 #include "AMateria.hpp"
 
-AMateria::AMateria()
-{
-	std::cout << "AMateria constructor\n";
-}
+AMateria::AMateria() {}
 
-AMateria::AMateria(std::string const & type) : _type(type)
-{
-	std::cout << "AMateria constructor\n";
-}
+AMateria::AMateria(std::string const & type) : _type(type) {}
 
-AMateria::AMateria(const AMateria& other) : _type(other._type)
-{
-	std::cout << "AMateria constructor\n";
-}
+AMateria::AMateria(const AMateria& other) : _type(other._type) {}
 
 AMateria& AMateria::operator=(const AMateria& other)
 {
-	if (this != &other)
-		_type = other._type;
+	(void)other;
 	return *this;
 }
 
@@ -27,11 +17,9 @@ std::string const & AMateria::getType() const
 	return _type;
 }
 
-void AMateria::use(ICharacter& target)
+void AMateria::use(ICharacter& target) 
 {
+	(void)target;
 }
 
-AMateria::~AMateria()
-{
-		std::cout << "AMateria destructor\n";
-}
+AMateria::~AMateria() {}

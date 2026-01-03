@@ -8,8 +8,7 @@ Cat::Cat() : Animal(), _brain(new Brain())
 
 Cat::Cat(const Cat& other) : Animal(other)
 {
-	_brain = new Brain();
-	*_brain = *(other._brain);
+	_brain = new Brain(*other._brain);
 	std::cout << "Cat copy constructor\n";
 }
 
@@ -25,7 +24,7 @@ Cat&    Cat::operator=(const Cat& other)
 
 void    Cat::makeSound() const
 {
-	std::cout << "Meawwww!\n";
+	std::cout << "Cat Meows!\n";
 }
 
 Brain	*Cat::getBrain() const

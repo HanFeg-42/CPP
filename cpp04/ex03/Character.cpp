@@ -16,7 +16,12 @@ Character::Character(const Character& other)
 {
 	_name = other._name;
 	for (int i = 0; i < 4; i++)
-		_inventory[i] = other._inventory[i]->clone();
+	{
+		if (other._inventory[i] == NULL)
+			_inventory[i] = NULL;
+		else
+			_inventory[i] = other._inventory[i]->clone();
+	}
 }
 
 Character& Character::operator=(const Character & other)
@@ -28,7 +33,10 @@ Character& Character::operator=(const Character & other)
 		{
 			if (_inventory[i] != NULL)
 				delete _inventory[i];
-			_inventory[i] = other._inventory[i]->clone();
+			if (other._inventory[i] == NULL)
+				_inventory[i] = NULL;
+			else
+				_inventory[i] = other._inventory[i]->clone();
 		}
 	}
 	return *this;
@@ -42,22 +50,26 @@ std::string const & Character::getName() const
 void Character::equip(AMateria* m)
 {
 	int i = 0;
-
-	while (i < 4 && _inventory[i])
+	if (!m)
+		return;
+	while (i < 4 && _inventory[i] != NULL)
 		i++;
+	std::cout << i << std::endl;
 	if (i < 4)
-		_inventory[i] = m->clone();
+		_inventory[i] = m;
 }
 
 void Character::unequip(int idx)
 {
-	_inventory[idx] = NULL;
+	if (idx >=0 && idx < 4)
+		_inventory[idx] = NULL;
 }
 
 void Character::use(int idx, ICharacter& target)
 {
-	if (_inventory[idx])
-		_inventory[idx]->use(target);
+	if (idx >=0 && idx < 4)
+		if (_inventory[idx])
+			_inventory[idx]->use(target);
 }
 
 Character::~Character()

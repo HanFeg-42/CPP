@@ -10,7 +10,7 @@ public:
 
     Cure & operator=(const Cure & other);
     AMateria* clone() const;
-    void use(ICharacter& target) const;
+    void use(ICharacter& target);
 
     ~Cure();
 };

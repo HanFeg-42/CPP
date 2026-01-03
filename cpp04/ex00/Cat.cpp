@@ -22,7 +22,7 @@ Cat&    Cat::operator=(const Cat& other)
 
 void    Cat::makeSound() const
 {
-	std::cout << "Meawwww!\n";
+	std::cout << "Cat Meows!\n";
 }
 
 Cat::~Cat()
