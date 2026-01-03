@@ -27,11 +27,6 @@ std::string const & AMateria::getType() const
 	return _type;
 }
 
-/* TODO
-• Ice: "* shoots an ice bolt at <name> *"
-• Cure: "* heals <name>’s wounds *"
- */
-
 void AMateria::use(ICharacter& target)
 {
 }
