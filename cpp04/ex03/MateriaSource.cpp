@@ -23,6 +23,8 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other)
 	{
 		for (int i = 0; i < 4; i++)
 		{
+			if (slots[i] != NULL)
+				delete slots[i];
 			if (other.slots[i] == NULL)
 				slots[i] = NULL;
 			else
