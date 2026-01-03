@@ -9,7 +9,12 @@ MateriaSource::MateriaSource()
 MateriaSource::MateriaSource(const MateriaSource& other)
 {
 	for (int i = 0; i < 4; i++)
-		slots[i] = other.slots[i]->clone();
+	{
+		if (other.slots[i] == NULL)
+			slots[i] = NULL;
+		else
+			slots[i] = other.slots[i]->clone();
+	}
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other)
@@ -17,7 +22,12 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other)
 	if (this != &other)
 	{
 		for (int i = 0; i < 4; i++)
-			slots[i] = other.slots[i]->clone();
+		{
+			if (other.slots[i] == NULL)
+				slots[i] = NULL;
+			else
+				slots[i] = other.slots[i]->clone();
+		}
 	}
 	return *this;
 }
@@ -27,7 +37,7 @@ void MateriaSource::learnMateria(AMateria* m)
 	int i;
 	for (i = 0; i < 4 && slots[i]; i++);
 	if (i < 4)
-		slots[i] = m->clone();
+		slots[i] = m;
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
@@ -39,5 +49,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 }
 
 MateriaSource::~MateriaSource() {
-
+	for (int i = 0; i < 4; i++)
+		if (slots[i])
+			delete slots[i];
 }

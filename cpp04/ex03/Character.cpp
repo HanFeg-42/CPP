@@ -54,7 +54,6 @@ void Character::equip(AMateria* m)
 		return;
 	while (i < 4 && _inventory[i] != NULL)
 		i++;
-	std::cout << i << std::endl;
 	if (i < 4)
 		_inventory[i] = m;
 }
@@ -75,5 +74,6 @@ void Character::use(int idx, ICharacter& target)
 Character::~Character()
 {
 	for (int i = 0; i < 4; i++)
-		delete _inventory[i];
+		if (_inventory[i])
+			delete _inventory[i];
 }
