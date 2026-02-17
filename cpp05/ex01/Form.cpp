@@ -17,10 +17,6 @@ Form::Form(std::string const name, int signGrade, int execGrade)
 Form::Form(const Form & other)
 	: _name(other._name), _signGrade(other._signGrade), _execGrade(other._execGrade), _isSigned(other._isSigned)
 {
-	if (_signGrade < 1 || _execGrade < 1)
-		throw GradeTooHighException();
-	if (_signGrade > 150 || _execGrade > 150)
-		throw GradeTooLowException();
 }
 
 Form & Form::operator=(const Form & other)
@@ -30,22 +26,22 @@ Form & Form::operator=(const Form & other)
 	return *this;
 }
 
-std::string Form::getName() const
+const std::string& Form::getName() const
 {
 	return _name;
 }
 
-bool	Form::getIsSigned() const
+const bool	Form::getIsSigned() const
 {
 	return _isSigned;
 }
 
-int	Form::getSignGrade() const
+const int	Form::getSignGrade() const
 {
 	return _signGrade;
 }
 
-int	Form::getExecGrade() const
+const int	Form::getExecGrade() const
 {
 	return _execGrade;
 }
@@ -57,10 +53,14 @@ void	Form::beSigned(const Bureaucrat& bureaucrat)
 	_isSigned = true;
 }
 
-std::ostream &operator<<(std::ostream& out, const Form& obj)
+std::ostream& operator<<(std::ostream& out, const Form& obj)
 {
-	out << obj.getName();
-	return out;
+    out << "Form \"" << obj.getName() << "\""
+        << ", sign grade: " << obj.getSignGrade()
+        << ", exec grade: " << obj.getExecGrade()
+        << ", status: " << (obj.getIsSigned() ? "signed" : "not signed");
+
+    return out;
 }
 
 const char* Form::GradeTooHighException::what() const throw()
@@ -72,7 +72,6 @@ const char* Form::GradeTooLowException::what() const throw()
 {
 	return "Error: Grade too LOW!";
 }
-
 
 Form::~Form()
 {

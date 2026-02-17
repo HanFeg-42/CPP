@@ -11,6 +11,7 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	// invalid
 	try {
@@ -21,6 +22,7 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	// increment
 	try {
@@ -33,6 +35,7 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
+	std::cout << std::endl;
 
 	// decre
 	try {
