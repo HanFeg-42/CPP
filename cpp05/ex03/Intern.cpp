@@ -36,10 +36,10 @@ AForm* Intern::makeForm(std::string const name, std::string const target) const
 	for (int i = 0; i < 3; i++)
 		if (formType[i] == name)
 		{
-			std::cout << "Intern creates" << name << std::endl;
+			std::cout << "Intern creates " << name << std::endl;
 			return forms[i](target);
 		}
-	std::cerr << "Intern can't create!" << name << "\n";
+	std::cerr << "Intern can't create " << name << "\n";
 	return NULL;
 }
 
