@@ -1,31 +1,28 @@
-#include <iostream>
+#include "Intern.hpp"
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
+#include <iostream>
 
 int main()
 {
     try
     {
+        Intern someRandomIntern;
+
+        // Ask intern to create a form
+        AForm* form = someRandomIntern.makeForm("robotomy request", "Bender");
+
+        if (!form)
+            return 1;
+
         Bureaucrat boss("Boss", 1);
 
-        ShrubberyCreationForm shrub("home");
-        RobotomyRequestForm robot("Bender");
-        PresidentialPardonForm pardon("Marvin");
+        boss.signForm(*form);
+        boss.executeForm(*form);
 
-        std::cout << boss << std::endl;
-
-        boss.signForm(shrub);
-        boss.executeForm(shrub);
-
-        boss.signForm(robot);
-        boss.executeForm(robot);
-
-        boss.signForm(pardon);
-        boss.executeForm(pardon);
+        delete form; // VERY important
     }
-    catch (std::exception& e)
+    catch (std::exception &e)
     {
         std::cout << "Exception: " << e.what() << std::endl;
     }
