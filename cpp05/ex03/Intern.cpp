@@ -30,11 +30,11 @@ AForm *presidentialPardon(std::string const target)
 
 AForm* Intern::makeForm(std::string const name, std::string const target) const
 {
-	std::string formType[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+	std::string formName[3] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	AForm* (*forms[3])(std::string) = {&shrubCreation, &robotomyRqst, &presidentialPardon};
 
 	for (int i = 0; i < 3; i++)
-		if (formType[i] == name)
+		if (formName[i] == name)
 		{
 			std::cout << "Intern creates " << name << std::endl;
 			return forms[i](target);

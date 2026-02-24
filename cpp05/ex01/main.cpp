@@ -5,8 +5,8 @@ int main()
 {
     try
     {
-        Form f("TaxForm", 50, 25);
-        Bureaucrat b("Alice", 40);
+        Form f("XForm", 50, 25);
+        Bureaucrat b("Hanan", 40);
 
         std::cout << f << std::endl;
 
