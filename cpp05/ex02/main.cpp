@@ -6,29 +6,31 @@
 
 int main()
 {
-    try
-    {
-        Bureaucrat boss("Boss", 1);
+	std::srand(time(0));
 
-        ShrubberyCreationForm shrub("home");
-        RobotomyRequestForm robot("Bender");
-        PresidentialPardonForm pardon("Marvin");
+	try
+	{
+		Bureaucrat boss("Boss", 1);
 
-        std::cout << boss << std::endl;
+		ShrubberyCreationForm shrub("home");
+		RobotomyRequestForm robot("rob");
+		PresidentialPardonForm pardon("Sukuna");
 
-        boss.signForm(shrub);
-        boss.executeForm(shrub);
+		std::cout << boss << std::endl;
 
-        boss.signForm(robot);
-        boss.executeForm(robot);
+		boss.signForm(shrub);
+		boss.executeForm(shrub);
 
-        boss.signForm(pardon);
-        boss.executeForm(pardon);
-    }
-    catch (std::exception& e)
-    {
-        std::cout << "Exception: " << e.what() << std::endl;
-    }
+		boss.signForm(robot);
+		boss.executeForm(robot);
 
-    return 0;
+		boss.signForm(pardon);
+		boss.executeForm(pardon);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	return 0;
 }
