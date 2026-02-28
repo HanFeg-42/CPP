@@ -5,8 +5,8 @@
 class ScalarConverter
 {
     ScalarConverter();
-    ScalarConverter(ScalarConverter& const other);
-    ScalarConverter& operator=(ScalarConverter& const other);
+    ScalarConverter(ScalarConverter& other);
+    ScalarConverter& operator=(ScalarConverter& other);
 public:
     static void convert(std::string literal);
     ~ScalarConverter();

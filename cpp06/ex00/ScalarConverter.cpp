@@ -1,18 +1,25 @@
 #include "ScalarConverter.hpp"
 #include <cstdlib>
+#include <iomanip>
 
-ScalarConverter& ScalarConverter::operator=(ScalarConverter& const other) {}
+ScalarConverter& ScalarConverter::operator=(ScalarConverter& other)
+{
+    (void)other;
+    return *this;
+}
 
 char getType(std::string& s)
 {
-    return 0;
+    (void)s;
+    return 'i';
 }
 
 void printScalarTypes(double n)
 {
     std::cout << "char: " << static_cast<char>(n) << std::endl;
     std::cout << "int: " << static_cast<int>(n) << std::endl;
-    std::cout << "float: " << static_cast<float>(n) << std::endl;
+    std::cout << std::fixed << std::setprecision(1);
+    std::cout << "float: " << static_cast<float>(n) << "f" << std::endl;
     std::cout << "double: " << n << std::endl;
 }
 
@@ -30,11 +37,15 @@ double ft_stod(std::string& s)
 }
 float ft_stof(std::string& s)
 {
-    
+    char* end_ptr;
+    double value = std::strtod(s.c_str(), &end_ptr);
+    return static_cast<float>(value);
 }
 char ft_stoc(std::string& s)
 {
-    
+    char* endptr;
+    long number = std::strtol(s.c_str(), &endptr, 10); // Base 10 conversion
+    return static_cast<char>(number);
 }
 
 void ScalarConverter::convert(std::string literal)
