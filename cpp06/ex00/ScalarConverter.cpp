@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <cstdlib>
 #include <iomanip>
+#include <sstream>
 
 ScalarConverter& ScalarConverter::operator=(ScalarConverter& other)
 {
@@ -14,60 +15,29 @@ char getType(std::string& s)
     return 'i';
 }
 
-void printScalarTypes(double n)
+int toInt(std::string& s)
 {
-    std::cout << "char: " << static_cast<char>(n) << std::endl;
-    std::cout << "int: " << static_cast<int>(n) << std::endl;
-    std::cout << std::fixed << std::setprecision(1);
-    std::cout << "float: " << static_cast<float>(n) << "f" << std::endl;
-    std::cout << "double: " << n << std::endl;
-}
 
-int ft_stoi(std::string& s)
-{
-    char* endptr;
-    long number = std::strtol(s.c_str(), &endptr, 10); // Base 10 conversion
-    return static_cast<int>(number);
 }
-double ft_stod(std::string& s)
+double toDouble(std::string& s)
 {
-    char* end_ptr;
-    double value = std::strtod(s.c_str(), &end_ptr);
-    return value;
+
 }
-float ft_stof(std::string& s)
+float toFloat(std::string& s)
 {
-    char* end_ptr;
-    double value = std::strtod(s.c_str(), &end_ptr);
-    return static_cast<float>(value);
+
 }
-char ft_stoc(std::string& s)
+char toChar(std::string& s)
 {
-    char* endptr;
-    long number = std::strtol(s.c_str(), &endptr, 10); // Base 10 conversion
-    return static_cast<char>(number);
+
 }
 
 void ScalarConverter::convert(std::string literal)
 {
-    char type = getType(literal);
-    switch (type)
-    {
-    case 'i':
-        printScalarTypes(ft_stoi(literal));
-        break;
-    case 'd':
-        printScalarTypes(ft_stod(literal));
-        break;
-    case 'f':
-        printScalarTypes(ft_stof(literal));
-        break;
-    case 'c':
-        printScalarTypes(ft_stoc(literal));
-        break;
-    default:
-        break;
-    }
+    toChar(literal);
+    toInt(literal);
+    toFloat(literal);
+    toDouble(literal);
 }
 
 ScalarConverter::~ScalarConverter() {}
