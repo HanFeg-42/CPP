@@ -31,8 +31,8 @@ void identify(Base& p)
 {
     try
     {
-        A& a = dynamic_cast<A&>(p);
-        (void)a;
+      (void) dynamic_cast<A&>(p);
+        
         std::cout << "A\n";
     }
     catch(const std::exception& e) {}
@@ -62,4 +62,6 @@ int main()
 
     identify(obj);
     identify(*obj);
+
+    delete obj;
 }

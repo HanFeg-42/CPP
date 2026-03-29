@@ -3,14 +3,6 @@
 #include <iomanip>
 #include <sstream>
 
-enum Type {
-    CHAR,
-    INT,
-    FLOAT,
-    DOUBLE,
-    PseudoLiteral
-};
-
 ScalarConverter& ScalarConverter::operator=(ScalarConverter& other)
 {
     (void)other;
@@ -20,6 +12,11 @@ ScalarConverter& ScalarConverter::operator=(ScalarConverter& other)
 const char* ScalarConverter::InvalidConversionException::what() const throw()
 {
 	return "Invalid Conversion!";
+}
+
+const char* ScalarConverter::InvalidArgException::what() const throw()
+{
+	return "Usage: ./convert [number]";
 }
 
 int isPseudoLiteral(std::string& s)
@@ -34,7 +31,6 @@ char getType(std::string& s)
         return FLOAT;
     if (s == "nan" || s == "-inf" || s == "+inf")
         return DOUBLE;
-    std::stringstream ss(s);
     if (s.length() == 1 && !isdigit(s[0]))
         return CHAR;
     return INT;
@@ -47,6 +43,7 @@ void toInt(double val, std::string& s)
     else
         std::cout << "int: " << static_cast<int>(val) << "\n";
 }
+
 void toDouble(double val, int type, std::string s)
 {
     if (isPseudoLiteral(s))
@@ -60,6 +57,7 @@ void toDouble(double val, int type, std::string s)
     std::cout << std::fixed << std::setprecision(1);
     std::cout << "double: " << val << "\n";
 }
+
 void toFloat(double val, int type, std::string s)
 {
     if (isPseudoLiteral(s))
@@ -67,13 +65,14 @@ void toFloat(double val, int type, std::string s)
         if (type == FLOAT)
             std::cout << "float: " << s << "\n";
         else
-            std::cout << "float: " << s + "f" << "\n";
+            std::cout << "float: " << s << "f\n";
         return ;
     }
     std::cout << std::fixed << std::setprecision(1);
     std::cout << "float: " << static_cast<float>(val) << "f\n";
 
 }
+
 void toChar(double val, std::string& s)
 {
     if (isPseudoLiteral(s))
@@ -92,10 +91,10 @@ void ScalarConverter::convert(std::string literal)
     char c;
     
     int type = getType(literal);
-    if (!isPseudoLiteral(literal) && type != CHAR)
+    if (!isPseudoLiteral(literal) && type != CHAR)  // type == INT
     {
         ss >> value;
-        if (ss.fail() || (ss >> c && c != 'f') || ss >> c)
+        if (ss.fail() || (ss >> c && c != 'f') || ss >> c)  
             throw InvalidConversionException();
     }
     if (type == CHAR)

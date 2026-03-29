@@ -3,19 +3,6 @@
 #include <stdint.h>
 #include "Data.hpp"
 
-//TODO
-/*
-* Understanding of pointers
-* 
-* Understanding of uintptr_t
-* 
-* Understanding of reinterpret_cast
-* 
-* Understanding of static class methods
-* 
-* Making a class non-instantiable
-*/
-
 class Serializer
 {
 private:

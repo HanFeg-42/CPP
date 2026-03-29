@@ -7,6 +7,7 @@ int main()
     Data* ptr = &obj;
     uintptr_t raw = Serializer::serialize(ptr);
     Data* restored = Serializer::deserialize(raw);
+
     std::cout << "Original pointer: " << ptr << std::endl;
     std::cout << "Restored pointer: " << restored << std::endl;
 }
