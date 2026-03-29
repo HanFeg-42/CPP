@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <iomanip>
 #include <sstream>
+#include <climits>
+#include <cmath>
 
 ScalarConverter& ScalarConverter::operator=(ScalarConverter& other)
 {
@@ -38,7 +40,7 @@ char getType(std::string& s)
 
 void toInt(double val, std::string& s)
 {
-    if (isPseudoLiteral(s))
+    if (isPseudoLiteral(s) || val > INT_MAX || val < INT_MIN)
         std::cout << "int: impossible\n";
     else
         std::cout << "int: " << static_cast<int>(val) << "\n";
@@ -54,6 +56,7 @@ void toDouble(double val, int type, std::string s)
             std::cout << "double: " << s.substr(0, s.size() - 1) << "\n";
         return ;
     }
+    else if (std::isinf(val))
     std::cout << std::fixed << std::setprecision(1);
     std::cout << "double: " << val << "\n";
 }
@@ -91,7 +94,7 @@ void ScalarConverter::convert(std::string literal)
     char c;
     
     int type = getType(literal);
-    if (!isPseudoLiteral(literal) && type != CHAR)  // type == INT
+    if (type == INT)
     {
         ss >> value;
         if (ss.fail() || (ss >> c && c != 'f') || ss >> c)  
