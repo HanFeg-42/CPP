@@ -4,7 +4,7 @@
 
 int main()
 {
-    std::vector<int> v(3, 6);
+    std::vector<int> v(4, 6); // 4 elements all equal to 6
 
     try {
         // found value

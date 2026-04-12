@@ -23,7 +23,7 @@ int main()
         printArr(intArr, intArr.size());
         std::cout << std::endl;
         std::cout << std::endl;
-        
+
         std::cout << "-----STRING ARRAY-----\n";
         Array<std::string> strArr(3);
 

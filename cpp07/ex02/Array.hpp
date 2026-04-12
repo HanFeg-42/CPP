@@ -28,7 +28,7 @@ public:
                 delete[] data;
             data = new T[_size];
             for (unsigned int i = 0; i < _size; i++)
-                data[i] = other.data[i];    
+                data[i] = other.data[i];
         }
         return *this;
     }
@@ -46,7 +46,7 @@ public:
             throw NonAccessibleException();
         return data[i];
     }
-    
+    \
     const T& operator[](unsigned int i) const {
         if (i >= _size)
             throw NonAccessibleException();
