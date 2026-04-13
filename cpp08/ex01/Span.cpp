@@ -1,9 +1,13 @@
 #include "Span.hpp"
 
 Span::Span() {}
+
 Span::Span(unsigned int n) : N(n) {}
+
 Span::Span(const Span& other) : v(other.v), N(other.N) {}
-Span& Span::operator=(const Span& other) {
+
+Span& Span::operator=(const Span& other)
+{
 	if (this != &other)
 	{
 		N = other.N;
@@ -11,9 +15,11 @@ Span& Span::operator=(const Span& other) {
 	}
 	return *this;
 }
+
 Span::~Span() {}
 
-void Span::addNumber(int n) {
+void Span::addNumber(int n)
+{
 	if (v.size() < N)
 		v.push_back(n);
 	else
