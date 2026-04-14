@@ -5,7 +5,8 @@
 int main()
 {
     // The MutantStack
-    {    
+    {
+        std::cout << "===MutantStack===\n";
         MutantStack<int> mstack;
 
         mstack.push(5);
@@ -35,7 +36,7 @@ int main()
         }
         std::stack<int> s(mstack);
     }
-    std::cout << "===========\n";
+    std::cout << "======List======\n";
     // Using the list container
     {    
         std::list<int> lst;
