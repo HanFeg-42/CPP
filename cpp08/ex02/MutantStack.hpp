@@ -18,11 +18,19 @@ public:
     ~MutantStack() {}
 
     typedef typename std::stack<T>::container_type::iterator iterator;
+    typedef typename std::stack<T>::container_type::const_iterator const_iterator;
     
     iterator begin() {
         return this->c.begin();
     }
     iterator end() {
+        return this->c.end();
+    }
+
+    iterator begin() const{
+        return this->c.begin();
+    }
+    iterator end() const{
         return this->c.end();
     }
 };
