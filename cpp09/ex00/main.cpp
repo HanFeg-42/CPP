@@ -6,6 +6,11 @@ int main(int ac, char *av[])
     {
         if (ac < 2)
             throw std::unvalid_argument("Error: could not open file.");
+        BitcoinExchange btc;
+
+        btc.loadData(DATA);
+        btc.processInput(av[1]);
+        
     }
     catch(std::exception& e)
     {
