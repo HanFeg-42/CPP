@@ -1,10 +1,10 @@
 #include "BitcoinExchange.hpp"
-#include <ifstream>
+#include <fstream>
 #include <string>
 
 BitcoinExchange::BitcoinExchange() {}
-BitcoinExchange::BitcoinExchange(cosnt BitcoinExchange& other) {}
-BitcoinExchange& BitcoinExchange::operator=(cosnt BitcoinExchange& other) {}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) {}
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {}
 BitcoinExchange::~BitcoinExchange() {}
 
 void BitcoinExchange::loadData(const std::string& filename) {

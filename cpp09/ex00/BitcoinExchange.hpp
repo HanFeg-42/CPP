@@ -12,8 +12,8 @@ private:
 	std::map<std::string, float> _data;
 public:
 	BitcoinExchange();
-	BitcoinExchange(cosnt BitcoinExchange& other);
-	BitcoinExchange& operator=(cosnt BitcoinExchange& other);
+	BitcoinExchange(const BitcoinExchange& other);
+	BitcoinExchange& operator=(const BitcoinExchange& other);
 	~BitcoinExchange();
 
 	void loadData(const std::string& filename);
