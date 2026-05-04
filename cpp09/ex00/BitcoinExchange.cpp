@@ -1,5 +1,6 @@
 #include "BitcoinExchange.hpp"
 #include <fstream>
+#include <sstream>
 #include <string>
 
 BitcoinExchange::BitcoinExchange() {}
@@ -22,6 +23,24 @@ void BitcoinExchange::loadData(const std::string& filename) {
     input.close();
 }
 
+int parseDate(std::string date)
+{
+    if (date.size() != 11)
+        std::cout << "Error: not a valid date." << std::endl;
+
+    std::string year, month, day;
+    std::istringstream is(date);
+    std::getline(is, year, '-');
+    std::getline(is, month, '-');
+    std::getline(is, day, '-');
+    
+}
+
+int parseValue(std::string value)
+{
+
+}
+
 void BitcoinExchange::processInput(const std::string& filename) {
     std::ifstream input(DATA);
     std::string line;
@@ -32,12 +51,12 @@ void BitcoinExchange::processInput(const std::string& filename) {
     while (std::getline(input, line)) {
         int pos = line.find('|');
         if (pos == std::string::npos)
-            std::cout << "Error: bad input => 2001-42-42\n";
+            std::cout << "Error: bad input => " << line << std::endl;
         std::string date = line.substr(0, pos);
         std::string value = line.substr(pos);
-        parseDate(date);
-        parseValue(value);
-        // .... a lot of code 
-        std::cout << date << "=>" << value << "= " << totalPrice;
+        if (!parseDate(date) || !parseValue(value)) // i suppose that they throw error
+            continue;
+        // .... a lot of code
+        std::cout << date << "=>" << value << "= " << getTotalPrice(value);
     }
 }
