@@ -28,23 +28,36 @@ int parseDate(std::string& date)
 	if (date.size() != 11)
 		std::cout << "Error: not a valid date." << std::endl;
 
-	std::string year, month, day;
-	std::istringstream is(date);
+	// yyyy-mm-dd
+	// 0123456789
 
-	if (std::getline(is, year, '-') && !parseYear(year))
+	if (date[4] != '-' || date[7] != '-')
+	{
+		std::cout << "Error: bad date format!" << std::endl;
 		return 0;
-	if (std::getline(is, month, '-') && !parseMonth(month))
+	}
+	std::string m = substr(5, 2);
+	std::string d = substr(8, 2);
+	std::stringstream sm(m);
+	std::stringstream sd(d);
+	int day, month;
+	sd >> day;
+	sm >> month;
+	if (day > 31 || day < 1 || month > 12 || month < 1)
+	{
+		std::cout << "Error: bad date format!" << std::endl;
 		return 0;
-	if (std::getline(is, day, '-') && !parseDay(day))
-		return 0;
-
-	if (std::getline(is, day))
-		return 0;
+	}
 
 	return 1;
 }
 
 int parseValue(std::string value)
+{
+
+}
+
+float	getTotalPrice(std::string value)
 {
 
 }
