@@ -9,31 +9,39 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {}
 BitcoinExchange::~BitcoinExchange() {}
 
 void BitcoinExchange::loadData(const std::string& filename) {
-    std::ifstream input(DATA);
-    std::string line;
+	std::ifstream input(DATA);
+	std::string line;
 
-    if (!input.is_open())
-        throw std::runtime_error("Can't open file");
-    std::getline(input, line);// i skipped the first line
-    while (std::getline(input, line)) {
-        std::string key = line.substr(0, POS_VALUE);
-        float value = line.substr(POS_VALUE + 1);
-        _data[key] = value; 
-    }
-    input.close();
+	if (!input.is_open())
+		throw std::runtime_error("Can't open file");
+	std::getline(input, line);// i skipped the first line
+	while (std::getline(input, line)) {
+		std::string key = line.substr(0, POS_VALUE);
+		float value = line.substr(POS_VALUE + 1);
+		_data[key] = value; 
+	}
+	input.close();
 }
 
-int parseDate(std::string date)
+int parseDate(std::string& date)
 {
-    if (date.size() != 11)
-        std::cout << "Error: not a valid date." << std::endl;
+	if (date.size() != 11)
+		std::cout << "Error: not a valid date." << std::endl;
 
-    std::string year, month, day;
-    std::istringstream is(date);
-    std::getline(is, year, '-');
-    std::getline(is, month, '-');
-    std::getline(is, day, '-');
-    
+	std::string year, month, day;
+	std::istringstream is(date);
+
+	if (std::getline(is, year, '-') && !parseYear(year))
+		return 0;
+	if (std::getline(is, month, '-') && !parseMonth(month))
+		return 0;
+	if (std::getline(is, day, '-') && !parseDay(day))
+		return 0;
+
+	if (std::getline(is, day))
+		return 0;
+
+	return 1;
 }
 
 int parseValue(std::string value)
@@ -42,21 +50,21 @@ int parseValue(std::string value)
 }
 
 void BitcoinExchange::processInput(const std::string& filename) {
-    std::ifstream input(DATA);
-    std::string line;
+	std::ifstream input(DATA);
+	std::string line;
 
-    if (!input.is_open())
-        throw std::runtime_error("Can't open file");
-    std::getline(input, line);// i skipped the first line
-    while (std::getline(input, line)) {
-        int pos = line.find('|');
-        if (pos == std::string::npos)
-            std::cout << "Error: bad input => " << line << std::endl;
-        std::string date = line.substr(0, pos);
-        std::string value = line.substr(pos);
-        if (!parseDate(date) || !parseValue(value)) // i suppose that they throw error
-            continue;
-        // .... a lot of code
-        std::cout << date << "=>" << value << "= " << getTotalPrice(value);
-    }
+	if (!input.is_open())
+		throw std::runtime_error("Can't open file");
+	std::getline(input, line);// i skipped the first line
+	while (std::getline(input, line)) {
+		int pos = line.find('|');
+		if (pos == std::string::npos)
+			std::cout << "Error: bad input => " << line << std::endl;
+		std::string date = line.substr(0, pos - 1);
+		std::string value = line.substr(pos + 1);
+		if (!parseDate(date) || !parseValue(value)) // i suppose that they throw error
+			continue;
+		// .... a lot of code
+		std::cout << date << "=>" << value << "= " << getTotalPrice(value);
+	}
 }
