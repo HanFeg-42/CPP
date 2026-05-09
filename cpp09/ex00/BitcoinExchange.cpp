@@ -28,7 +28,7 @@ void BitcoinExchange::loadData()
 	double value;
 
 	if (!input.is_open())
-		throw std::runtime_error("Can't open file");
+		throw std::runtime_error("Can't open file.");
 	std::getline(input, line);
 	while (std::getline(input, line))
 	{
@@ -68,19 +68,19 @@ int parseDate(std::string date)
 	}
 	if (date[4] != '-' || date[7] != '-' || std::count(date.begin(), date.end(), '-') != 2)
 	{
-		std::cout << "Error: bad date format!" << std::endl;
+		std::cout << "Error: bad date format." << std::endl;
 		return 0;
 	}
 	date[4] = ' ';
 	date[7] = ' ';
 	std::stringstream ss(date);
-	int day, month, year;
+	int day, month, year, c;
 	ss >> year;
 	ss >> month;
 	ss >> day;
-	if (ss.fail() || !isDateValid(year, month, day))
+	if (ss.fail() || ss >> c || !isDateValid(year, month, day))
 	{
-		std::cout << "Error: invalid date!" << std::endl;
+		std::cout << "Error: not a valid date." << std::endl;
 		return 0;
 	}
 	return 1;
@@ -88,11 +88,12 @@ int parseDate(std::string date)
 
 double parseValue(std::string value)
 {
-	std::stringstream s(value);
-	double n;
+	std::stringstream	s(value);
+	double				n;
+	char				c;
 
 	s >> n;
-	if (s.fail())
+	if (s.fail() || s >> c)
 	{
 		std::cout << "Error: invalid number." << std::endl;
 		return 0;
@@ -114,6 +115,11 @@ double BitcoinExchange::getPrice(std::string key)
 {
 	std::map<std::string, double>::iterator it;
 	it = _data.lower_bound(key);
+	if (it->first == key)
+		return (it->second);
+	if (it == _data.begin())
+		return -1;
+	--it;
 	return (it->second);
 }
 
@@ -121,7 +127,7 @@ void BitcoinExchange::processInput(const char* filename) {
 	std::ifstream	input(filename);
 	std::string		line, date, strValue;
 	size_t			pos;
-	double			value = 0.0;
+	double			value, x;
 
 	if (!input.is_open())
 		throw std::runtime_error("Can't open file");
@@ -137,7 +143,10 @@ void BitcoinExchange::processInput(const char* filename) {
 		strValue = line.substr(pos + 1);
 		if (!parseDate(date) || !(value = parseValue(strValue)))
 			continue;
-		std::cout << date << " => " << value << " = ";
-		std::cout << value * getPrice(date) << std::endl;
+		x = getPrice(date);
+		if (x < 0)
+			std::cout << "Error: unfound value." << std::endl;
+		else
+			std::cout << date << " => " << value << " = " << value * x << std::endl;
 	}
 }
