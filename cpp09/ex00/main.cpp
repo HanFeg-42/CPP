@@ -5,10 +5,10 @@ int main(int ac, char *av[])
     try
     {
         if (ac < 2)
-            throw std::unvalid_argument("Error: could not open file.");
+            throw std::invalid_argument("Error: could not open file.");
         BitcoinExchange btc;
 
-        btc.loadData(DATA);
+        btc.loadData();
         btc.processInput(av[1]);
         
     }

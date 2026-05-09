@@ -9,13 +9,14 @@
 
 class BitcoinExchange {
 private:
-	std::map<std::string, float> _data;
+	std::map<std::string, double> _data;
 public:
 	BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& other);
 	BitcoinExchange& operator=(const BitcoinExchange& other);
 	~BitcoinExchange();
 
-	void loadData(const std::string& filename);
-	void processInput(const std::string& filename);
+	void	loadData();
+	void	processInput(const char* filename);
+	double	getPrice(std::string value);
 };
