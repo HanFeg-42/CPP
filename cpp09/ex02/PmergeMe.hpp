@@ -3,10 +3,10 @@
 class PmergeMe
 {
 private:
-    /* data */
+	/* data */
 public:
-    PmergeMe(/* args */);
-    ~PmergeMe();
+	PmergeMe(/* args */);
+	~PmergeMe();
 };
 
 // constraints
@@ -17,5 +17,6 @@ public:
 - avoid generic functions
 - follow the output format
 
-
+// The purpose of this algo is to sort the sequence
+// in the minimum number of absolute comparisons.
 
