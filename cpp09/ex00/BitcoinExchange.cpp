@@ -106,7 +106,7 @@ double parseValue(std::string value)
 	if (n > INT_MAX)
 	{
 		std::cout << "Error: too large a number." << std::endl;
-		return 0;	
+		return 0;
 	}
 	return n;
 }
