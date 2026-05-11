@@ -5,11 +5,10 @@
 RPN::RPN()
 {
 }
+
 RPN::~RPN()
 {
 }
-
-
 
 int RPN::evaluate(const std::string& expression)
 {
