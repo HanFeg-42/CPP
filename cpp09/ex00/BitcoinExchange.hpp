@@ -7,7 +7,8 @@
 #define DATA "data.csv"
 #define POS_VALUE 10
 
-class BitcoinExchange {
+class BitcoinExchange
+{
 private:
 	std::map<std::string, double> _data;
 public:
