@@ -2,13 +2,18 @@
 #include <cctype>
 #include <sstream>
 
-RPN::RPN()
+RPN::RPN() {}
+
+RPN::RPN(const RPN& other) : s(other.s) {}
+
+RPN& RPN::operator=(const RPN& other)
 {
+	if (this != &other)
+		s = other.s;
+	return *this;
 }
 
-RPN::~RPN()
-{
-}
+RPN::~RPN() {}
 
 int RPN::evaluate(const std::string& expression)
 {
