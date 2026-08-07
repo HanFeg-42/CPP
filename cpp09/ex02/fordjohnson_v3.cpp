@@ -73,7 +73,7 @@
 //                     std::vector<int>& main,
 //                     std::vector<int>& seq,
 //                     size_t lvl,
-//                     std::vector<std::pair<int, int> >& labels)
+//                     std::vector<int>& labels)
 // {
 //     // ta7ta 3onwan l "HARDCODE"
 //     size_t i = 0;
@@ -102,7 +102,7 @@
 //             main.push_back(seq[i]);
 //             i++;
 //         }
-//         labels.push_back(std::make_pair(pend.size() / lvl - 1, main.size() / lvl - 1));
+//         labels.push_back(main.size() / lvl - 1);
 //     }
 //     debugVec("seq after sortPairs", seq);
 //     debugVec("main", main);
@@ -124,7 +124,8 @@
 
 // void insertElement(std::vector<int>& main,
 //                    const std::vector<int>& pend, int elemIdxPend,
-//                    int posElem, int lvl)
+//                    int posElem, int lvl,
+//                    std::vector<int>& labels)
 // {
 //     std::vector<int> block;
 //     block.reserve(lvl);
@@ -133,15 +134,20 @@
 //         block.push_back(pend[start + i]);
 
 //     main.insert(main.begin() + posElem * lvl, block.begin(), block.end());
+//     for (size_t i = posElem; i < labels.size(); i++)
+//         labels[i]++;
 // }
 
 // int findInsertPos(const std::vector<int>& main,
 //                   const std::vector<int>& pend,
-//                   int elemIdxPend, int lvl)
+//                   size_t elemIdxPend, int lvl,
+//                   std::vector<int>& labels)
 // {
 //     //binary search
 //     int left = 0;
-//     int right = main.size() / lvl; // number of elements
+//     int right = (labels.empty() || elemIdxPend >= labels.size())
+//                 ? main.size() / lvl
+//                 : labels[elemIdxPend]; // number of elements
 
 //     while (left < right) {
 //         int mid = (left + right) / 2;
@@ -204,9 +210,9 @@
 // void insertPendIntoMain(std::vector<int>& pend,
 //                         std::vector<int>& main,
 //                         int lvl,
-//                         std::vector<std::pair<int, int> >& labels)
+//                         std::vector<int>& labels)
 // {
-//     (void)labels;
+//     // (void)labels;
 //     size_t pend_elmt = pend.size() / lvl;
 //     if (pend_elmt == 0)
 //         return;
@@ -216,9 +222,9 @@
 //     for (size_t k = 0; k < order.size(); ++k) {
 //         int pendIdx = order[k]; // element index in pend
 
-//         int posElem = findInsertPos(main, pend, pendIdx, lvl);
+//         int posElem = findInsertPos(main, pend, pendIdx, lvl, labels);
 
-//         insertElement(main, pend, pendIdx, posElem, lvl);
+//         insertElement(main, pend, pendIdx, posElem, lvl, labels);
 //     }
 // }
 
@@ -233,7 +239,7 @@
 
 //     std::vector<int> pend;
 //     std::vector<int> main;
-//     std::vector<std::pair<int, int> > labels;
+//     std::vector<int> labels;
 //     initPendAndMain(pend, main, seq, lvl, labels);
 //     if (pend.empty())
 //         return updateSeq(seq, main);

@@ -5,21 +5,24 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <deque>
 
 class PmergeMe
 {
 private:
 	std::vector<int> vect;
+	std::deque<int> deq; 
 
 public:
 	PmergeMe(/* args */);
 	~PmergeMe();
-
 	static int nbr_of_comps;
 	
 	void parseArgs(int ac, char** av);
-	void printVect();
 	void sortVect();
+	void sortDeque();
+	void printVect();
+	void printDeque();
 };
 
 // constraints
