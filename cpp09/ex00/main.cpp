@@ -10,7 +10,6 @@ int main(int ac, char *av[])
 
         btc.loadData();
         btc.processInput(av[1]);
-        
     }
     catch(std::exception& e)
     {

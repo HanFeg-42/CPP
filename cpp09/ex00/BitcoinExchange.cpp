@@ -36,7 +36,7 @@ void BitcoinExchange::loadData()
 		std::string nbr = line.substr(POS_VALUE + 1);
 		std::stringstream ss(nbr);
 		ss >> value;
-		_data[key] = value; 
+		_data[key] = value;
 	}
 	input.close();
 }
@@ -103,7 +103,7 @@ double parseValue(std::string value)
 		std::cout << "Error: not a positive number." << std::endl;
 		return 0;
 	}
-	if (n > INT_MAX)
+	if (n > 1000)
 	{
 		std::cout << "Error: too large a number." << std::endl;
 		return 0;
@@ -123,7 +123,8 @@ double BitcoinExchange::getPrice(std::string key)
 	return (it->second);
 }
 
-void BitcoinExchange::processInput(const char* filename) {
+void BitcoinExchange::processInput(const char* filename)
+{
 	std::ifstream	input(filename);
 	std::string		line, date, strValue;
 	size_t			pos;
@@ -132,7 +133,8 @@ void BitcoinExchange::processInput(const char* filename) {
 	if (!input.is_open())
 		throw std::runtime_error("Can't open file");
 	std::getline(input, line);
-	while (std::getline(input, line)) {
+	while (std::getline(input, line))
+	{
 		pos = line.find('|');
 		if (pos == std::string::npos)
 		{
