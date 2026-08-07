@@ -21,6 +21,15 @@ int comparisonLimit(int n)
     return total;
 }
 
+void debugVec(const char* name, std::vector<int>& v)
+{
+    std::cout << name << ": ";
+    for (size_t i = 0; i < v.size(); ++i)
+        std::cout << v[i] << " ";
+    std::cout << "\n";
+}
+
+
 int main(int ac, char** av)
 {
 	try
@@ -30,14 +39,14 @@ int main(int ac, char** av)
 		
 		PmergeMe P;
 		P.parseArgs(ac, av);
-		std::cout << "Before:\t";
-		P.printVect();
+		debugVec("Before:\t", P.getVect());
 		P.sortVect();
-		P.sortDeque();
+		// P.sortDeque();
+		debugVec("After:\t", P.getVect());
 
 		std::cout << std::endl;
 		std::cout << "Comparisons: "
-          << PmergeMe::nbr_of_comps
+          << PmergeMe::nbr_of_comps / 2
           << " / "
           << comparisonLimit(ac - 1)
           << "\n";

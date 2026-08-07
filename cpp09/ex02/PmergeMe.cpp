@@ -2,20 +2,35 @@
 // #include <sstream>
 // #include <algorithm>
 // #include <utility>
+// #include <deque>
+// #include <vector>
 
 // int PmergeMe::nbr_of_comps = 0;
 
-// PmergeMe::PmergeMe(/* args */)
+// PmergeMe::PmergeMe() {}
+
+// PmergeMe::PmergeMe(const PmergeMe& other) : vect(other.vect), deq(other.deq) {}
+
+// PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 // {
+// 	if (this != &other)
+//     {
+//         vect = other.vect;
+//         deq = other.deq;
+//     }
+// 	return *this;
 // }
 
-// PmergeMe::~PmergeMe()
+// PmergeMe::~PmergeMe() {}
+
+// std::vector<int>& PmergeMe::getVect()
 // {
+//     return vect;
 // }
-// void debugVec(const char* name, const std::vector<int>& v) {
-//     std::cout << name << ": ";
-//     for (size_t i = 0; i < v.size(); ++i) std::cout << v[i] << " ";
-//     std::cout << "\n";
+
+// std::deque<int>& PmergeMe::getDeque()
+// {
+//     return deq;
 // }
 
 // void PmergeMe::parseArgs(int ac, char** av)
@@ -33,13 +48,8 @@
 //             throw std::runtime_error("Error");
 
 //         vect.push_back(n);
+//         deq.push_back(n);
 // 	}
-// }
-
-// void PmergeMe::printVect()
-// {
-//     for (size_t i = 0; i < vect.size(); i++)
-//         std::cout << vect[i] << " ";
 // }
 
 // bool _comp(int &a, int &b)
@@ -48,19 +58,21 @@
 //     return a < b;
 // }
 
-// void swapPair(std::vector<int>& seq, int idx, int lvl)
+// template <typename Container>
+// void swapPair(Container& seq, int idx, int lvl)
 // {
 //     if (lvl == 1)
 //         std::swap(seq[idx - 1], seq[idx]);
 //     else
 //     {
-//         std::vector<int>::iterator first = seq.begin() +  idx - lvl;
-//         std::vector<int>::iterator last = seq.begin() +  idx;
+//         typename Container::iterator first = seq.begin() + idx - lvl;
+//         typename Container::iterator last = seq.begin() + idx;
 //         std::swap_ranges(first, last, last);
 //     }
 // }
 
-// void sortPairs(std::vector<int>& seq, int lvl)
+// template <typename Container>
+// void sortPairs(Container& seq, int lvl)
 // {
 //     for (size_t i = lvl - 1; i + lvl < seq.size(); i += (lvl * 2))
 //     {
@@ -69,24 +81,25 @@
 //     }
 // }
 
-// void initPendAndMain(std::vector<int>& pend,
-//                     std::vector<int>& main,
-//                     std::vector<int>& seq,
+// template <typename Container>
+// void initPendAndMain(Container& pend,
+//                     Container& main,
+//                     Container& seq,
 //                     size_t lvl,
-//                     std::vector<std::pair<int, int> >& labels)
+//                     std::vector<int>& labels)
 // {
 //     // ta7ta 3onwan l "HARDCODE"
 //     size_t i = 0;
 //     while (i < seq.size())
-//     {        
-//         if (seq.size() - main.size() - pend.size() < (size_t)lvl) // kml
+//     {
+//         if (seq.size() - main.size() - pend.size() < lvl)
 //             break;
 //         while (i < lvl * 2 && i < seq.size())
 //         {
 //             main.push_back(seq[i]);
 //             i++;
 //         }
-//         if (seq.size() - main.size() - pend.size() < lvl) // kml
+//         if (seq.size() - main.size() - pend.size() < lvl)
 //             break;
 //         size_t stop = i + lvl;
 //         while (i < stop && i < seq.size())
@@ -94,7 +107,7 @@
 //             pend.push_back(seq[i]);
 //             i++;
 //         }
-//         if (seq.size() - main.size() - pend.size() < lvl) // kml
+//         if (seq.size() - main.size() - pend.size() < lvl)
 //             break;
 //         stop = i + lvl;
 //         while (i < stop && i < seq.size())
@@ -102,61 +115,66 @@
 //             main.push_back(seq[i]);
 //             i++;
 //         }
-//         labels.push_back(std::make_pair(pend.size() / lvl - 1, main.size() / lvl - 1));
+//         labels.push_back(main.size() / lvl - 1);
 //     }
-//     debugVec("seq after sortPairs", seq);
-//     debugVec("main", main);
-//     debugVec("pend", pend);
 // }
 
-// void updateSeq(std::vector<int>& seq, std::vector<int> main)
+// template <typename Container>
+// void updateSeq(Container& seq, Container main)
 // {
 //     std::copy(main.begin(), main.end(), seq.begin());
 // }
 
-// bool elementLess(const std::vector<int>& main, int elemIdxMain,
-//                  const std::vector<int>& pend, int elemIdxPend, int lvl)
+// template <typename Container>
+// bool elementLess(const Container& main, int elemIdxMain,
+//                  const Container& pend, int elemIdxPend, int lvl)
 // {
 //     int a = main[(elemIdxMain + 1) * lvl - 1]; // last value of main elem
 //     int b = pend[(elemIdxPend + 1) * lvl - 1]; // last value of pend elem
 //     return _comp(a, b);
 // }
 
-// void insertElement(std::vector<int>& main,
-//                    const std::vector<int>& pend, int elemIdxPend,
-//                    int posElem, int lvl)
+// template <typename Container>
+// void insertElement(Container& main,
+//                    const Container& pend, int elemIdxPend,
+//                    int posElem, int lvl,
+//                    std::vector<int>& labels)
 // {
-//     std::vector<int> block;
-//     block.reserve(lvl);
+//     Container block;
 //     int start = elemIdxPend * lvl;
 //     for (int i = 0; i < lvl; ++i)
 //         block.push_back(pend[start + i]);
 
 //     main.insert(main.begin() + posElem * lvl, block.begin(), block.end());
+//     for (size_t i = posElem; i < labels.size(); i++)
+//         labels[i]++;
 // }
 
-// int findInsertPos(const std::vector<int>& main,
-//                   const std::vector<int>& pend,
-//                   int elemIdxPend, int lvl)
+// template <typename Container>
+// int findInsertPos(const Container& main,
+//                   const Container& pend,
+//                   size_t elemIdxPend, int lvl,
+//                   std::vector<int>& labels)
 // {
 //     //binary search
 //     int left = 0;
-//     int right = main.size() / lvl; // number of elements
+//     int right = (labels.empty() || elemIdxPend >= labels.size())
+//                 ? main.size() / lvl
+//                 : labels[elemIdxPend];
 
-//     while (left < right) {
+//     while (left < right)
+//     {
 //         int mid = (left + right) / 2;
-//         if (elementLess(main, mid, pend, elemIdxPend, lvl)) {
+//         if (elementLess(main, mid, pend, elemIdxPend, lvl))
 //             left = mid + 1;
-//         } else {
+//         else
 //             right = mid;
-//         }
 //     }
 //     return left;
 // }
 
 // int jacobsthalN(int n) {
 //     // n >= 1, J(1) = 1, J(2) = 3, J(3) = 5, ...
-//     // simple iterative version:
 //     if (n == 1) return 1;
 //     if (n == 2) return 3;
 //     int j1 = 1, j2 = 3;
@@ -172,16 +190,15 @@
 //     std::vector<int> order;
 //     if (pend_elmt == 0) return order;
 
-//     int prev = 1; // b1 anchor
+//     int prev = 1;
 
 //     for (int n = 2;; ++n) {
 //         int j = jacobsthalN(n); // 3, 5, 11, ...
 //         if (j > (int)pend_elmt + 1)
 //             break;
 
-
 //         for (int bIndex = j; bIndex > prev; --bIndex) {
-//             int pendIdx = bIndex - 2; // l idx f pend kaybdaw mn 0 wlakin betas kaybdaw n 2 f pend 
+//             int pendIdx = bIndex - 2; // l idx f pend kaybdaw mn 0 wlakin betas kaybdaw n 2 f pend
 //             if (pendIdx >= 0 && pendIdx < (int)pend_elmt)
 //                 order.push_back(pendIdx);
 //         }
@@ -201,12 +218,12 @@
 //     return order;
 // }
 
-// void insertPendIntoMain(std::vector<int>& pend,
-//                         std::vector<int>& main,
+// template <typename Container>
+// void insertPendIntoMain(Container& pend,
+//                         Container& main,
 //                         int lvl,
-//                         std::vector<std::pair<int, int> >& labels)
+//                         std::vector<int>& labels)
 // {
-//     (void)labels;
 //     size_t pend_elmt = pend.size() / lvl;
 //     if (pend_elmt == 0)
 //         return;
@@ -216,24 +233,22 @@
 //     for (size_t k = 0; k < order.size(); ++k) {
 //         int pendIdx = order[k]; // element index in pend
 
-//         int posElem = findInsertPos(main, pend, pendIdx, lvl);
+//         int posElem = findInsertPos(main, pend, pendIdx, lvl, labels);
 
-//         insertElement(main, pend, pendIdx, posElem, lvl);
+//         insertElement(main, pend, pendIdx, posElem, lvl, labels);
 //     }
 // }
 
-// void fordJohnson(std::vector<int>& seq, size_t lvl)
+// template <typename Container>
+// void fordJohnson(Container& seq, size_t lvl)
 // {
-//     std::cout << "\n-------recursion lvl = " << lvl << "-----\n";
 //     sortPairs(seq, lvl);
-//     debugVec("seq in lvl", seq);
 //     if (lvl * 2 <= seq.size() / 2)
 //         fordJohnson(seq, lvl * 2);
-//     std::cout << "\n--back recursion lvl = " << lvl << "-----\n";
 
-//     std::vector<int> pend;
-//     std::vector<int> main;
-//     std::vector<std::pair<int, int> > labels;
+//     Container pend;
+//     Container main;
+//     std::vector<int> labels;
 //     initPendAndMain(pend, main, seq, lvl, labels);
 //     if (pend.empty())
 //         return updateSeq(seq, main);
@@ -243,7 +258,10 @@
 
 // void PmergeMe::sortVect()
 // {
-//     fordJohnson(vect, 1);
-//     std::cout << "\nAfter:\t";
-//     printVect();
+//     fordJohnson(vect, (size_t)1);
+// }
+
+// void PmergeMe::sortDeque()
+// {
+//     fordJohnson(deq, (size_t)1);
 // }
