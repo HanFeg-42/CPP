@@ -25,5 +25,4 @@ public:
 	void sortDeque();
 	std::vector<int>&  getVect();
 	std::deque<int>&  getDeque();
-	void printVect();
 };
