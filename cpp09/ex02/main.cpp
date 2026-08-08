@@ -33,7 +33,7 @@ int main(int ac, char** av)
 		std::cout << "Before:\t";
 		P.printVect();
 		P.sortVect();
-		P.sortDeque();
+		// P.sortDeque();
 
 		std::cout << std::endl;
 		std::cout << "Comparisons: "
